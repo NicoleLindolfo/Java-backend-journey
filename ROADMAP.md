@@ -110,53 +110,90 @@ This roadmap is organized by **phase, not by calendar deadline**. One year is th
 - Final segment: Fintech/Payments vs. Infrastructure/Data Streaming — to be decided later, with more hands-on experiencewq
 
 
-Projeto âncora: API de pagamentos/carteira em Spring Boot + PostgreSQL, com idempotency keys, lançamentos em partida dobrada (ledger), controle de concorrência, testes de integração e README com decisões técnicas documentadas. Ele vira Tier 3, com chance de Tier 4.
-README em inglês simples desde o início.
-Kafka, Redis, AWS, observabilidade.
-Primeira contribuição open source pequena (documentação ou issue bem escrita).
-Escolher entre Fintech e Data Infra, depois de ter experiência prática.
+## 🏗️ Portfolio Plan: Three Connected Projects
 
--Projeto 1 (flagship): API de pagamentos com ledger
+My portfolio is **one system that grows in three stages**, not three unrelated projects. Each stage goes deeper into the same problem: moving money correctly in a system that cannot afford to fail.
 
-O que é: um mini processador de pagamentos em Java + Spring Boot + PostgreSQL. Um comerciante cria uma cobrança, ela é autorizada, capturada e pode ser reembolsada.
+> I will only call a project "done" when it has passing tests in CI, a README with run instructions and technical decisions, and I can explain every decision without looking anything up.
 
-O que ele precisa ter (é isso que o torna Tier 3 e não "projeto de estudante"):
+---
 
-Chave de idempotência: a mesma requisição enviada duas vezes cria uma cobrança só.
-Ledger em partida dobrada: cada movimentação gera lançamentos de débito e crédito que sempre fecham em zero.
-Máquina de estados da cobrança, com transições válidas e inválidas bloqueadas.
-Controle de concorrência: lock otimista ou pessimista, para dois saques simultâneos não estourarem o saldo.
-Transactional outbox: o evento só é publicado se a transação confirmou.
-Webhooks com retry e backoff.
-Testes de integração com Testcontainers, incluindo um teste de concorrência (ex.: 100 threads, mesma chave, uma cobrança).
-Log de auditoria e cuidado com dados sensíveis (não guardar número de cartão, usar token simulado).
-README e ADRs (decisões arquiteturais): por que escolhi lock otimista, por que partida dobrada.
+### 🥇 Project 1 — Payments API with a Ledger (Anchor Project)
 
-Como te ajuda: cobre quase toda pergunta típica de entrevista de pagamentos ("como evitar cobrança duplicada?", "o que acontece se o serviço cair no meio da transação?") com código seu para apontar.
+**Stack:** Java · Spring Boot · PostgreSQL · Testcontainers
 
+**What it is:** a mini payment processor. A merchant creates a charge, which can be authorized, captured, and refunded.
 
+**What it must include:**
 
-Projeto 2: pipeline de eventos com Kafka
+- [ ] **Idempotency keys:** sending the same request twice creates only one charge
+- [ ] **Double-entry ledger:** every movement creates debit and credit entries that always sum to zero
+- [ ] **State machine:** valid charge transitions are allowed, invalid ones are blocked
+- [ ] **Concurrency control:** optimistic or pessimistic locking, so two simultaneous withdrawals cannot overdraw a balance
+- [ ] **Transactional outbox:** an event is published only if the transaction committed
+- [ ] **Webhooks** with retry and exponential backoff
+- [ ] **Integration tests with Testcontainers**, including a concurrency test (for example: 100 threads, same key, exactly one charge)
+- [ ] **Audit log** and safe handling of sensitive data (no real card numbers, only simulated tokens)
+- [ ] **README and ADRs** (Architecture Decision Records): why optimistic locking, why double-entry, and so on
 
-O que é: uma extensão do Projeto 1. Os eventos de pagamento passam por Kafka, e consumidores calculam saldos, detectam padrões suspeitos simples e geram relatórios.
+**Why it matters:** it lets me answer common payments interview questions with my own code:
 
-Precisa ter: consumidor idempotente, retries, dead-letter queue, ordenação por chave, métricas básicas (Prometheus/Grafana) e a explicação do trade-off at-least-once vs exactly-once.
+- *How do you prevent duplicate charges?*
+- *What happens if the service crashes in the middle of a transaction?*
 
-Como te ajuda: é a ponte entre Fintech e Infra de Dados, então você mantém as duas portas abertas sem decidir agora. Também mostra que você pensa em sistemas distribuídos, não só em um serviço isolado.
+---
 
+### 🥈 Project 2 — Event Pipeline with Kafka
 
+**What it is:** an extension of Project 1. Payment events flow through Kafka, and consumers calculate balances, flag simple suspicious patterns, and generate reports.
 
-Projeto 3: laboratório de falhas e carga (o diferenciador)
+**What it must include:**
 
-O que é: um relatório reproduzível provando que o sistema se comporta bem sob estresse: teste de carga (k6), duplicação de mensagens, queda do banco no meio de uma transação, reinício de consumidor.
+- [ ] Idempotent consumers
+- [ ] Retries and a dead-letter queue
+- [ ] Ordering guaranteed by message key
+- [ ] Basic metrics (Prometheus and Grafana)
+- [ ] A written explanation of the **at-least-once vs exactly-once** trade-off
 
-Precisa ter: cenários, resultados, o que quebrou, o que você corrigiu e uma análise no formato de postmortem.
+**Why it matters:** it connects Fintech and Data Infrastructure, so I keep both paths open until I have enough hands-on experience to choose.
 
-Como te ajuda: quase nenhum júnior faz isso. É a evidência de que você pensa em confiabilidade, justamente o que sua área-alvo exige, e vira ótimo material de conversa na entrevista. Este é o seu Tier 4.
+---
 
-Ordem sugerida (por fase, não por data, como você já faz)
-Fundamentos + Spring/SQL: exercícios com testes. Ainda não são portfólio.
-Projeto 1 quando você dominar Spring Boot, SQL e testes (provavelmente a maior parte do meio do ano).
-Projeto 2 com o Projeto 1 estável.
-Projeto 3 no final, sobre o que já existe.
-Candidaturas só depois do Projeto 1 estar sólido. Não espere o 3 terminar para começar a se candidatar.
+### 🥉 Project 3 — Failure and Load Lab (The Differentiator)
+
+**What it is:** a reproducible report showing how the system behaves under stress.
+
+**Scenarios to test:**
+
+- [ ] Load testing with k6
+- [ ] Duplicate messages
+- [ ] Database failure in the middle of a transaction
+- [ ] Consumer restart
+
+**What it must include:** the scenarios, the results, what broke, what I fixed, and a postmortem-style analysis.
+
+**Why it matters:** it shows that I think about reliability, not only about making things work. This is exactly what high-criticality systems require.
+
+---
+
+## 🧭 Order of Execution (by phase, not by date)
+
+1. **Fundamentals + Spring/SQL:** exercises with tests. These are practice, not portfolio yet.
+2. **Project 1:** once I am comfortable with Spring Boot, SQL, and testing.
+3. **Project 2:** once Project 1 is stable.
+4. **Project 3:** at the end, built on top of what already exists.
+5. **Job applications:** start once Project 1 is solid. Do not wait for Project 3.
+
+---
+
+## 🔭 Later (not now)
+
+- Redis, AWS, and deeper observability, only when a project needs them
+- One small open source contribution (documentation fix or a well-written issue)
+- Choosing between **Fintech/Payments** and **Data Infrastructure/Streaming**, after real hands-on experience
+
+---
+
+## 🚫 What I Will Not Build
+
+Shopping cart e-commerce, CRUD-only banking apps, library systems, to-do apps. They do not demonstrate correctness, reliability, or scale.
