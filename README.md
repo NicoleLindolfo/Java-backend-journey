@@ -32,13 +32,8 @@ Land my first position as a **Junior Backend Engineer in Java**, working on syst
 \`\`\`
 ├── ROADMAP.md               → full technical roadmap, by phase
 ├── PROGRESS.md              → progress checkpoints (0, 2, 6, 8, 12 months)
-├── english-track.md         → English learning track
-├── 01-fundamentals/
-├── 02-data-structures/
-├── 03-java-and-oop/
-├── 04-databases-and-spring/
-├── 05-systems-architecture/
-└── projects/                → portfolio projects
+├── ENGLISH.md         → English learning track
+
 \`\`\`
 
 ## 🧭 Principles guiding this study
