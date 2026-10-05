@@ -7,7 +7,7 @@ This roadmap is organized by **phase, not by calendar deadline**. One year is th
 
 ---
 
-## Phase 0 — Bridge
+<!-- ## Phase 0 — Bridge
 
 **Goal:** move past absolute zero without committing to a final language/stack yet.
 
@@ -18,9 +18,7 @@ This roadmap is organized by **phase, not by calendar deadline**. One year is th
 - [ ] **P1** — REST API concepts, HTTP, middleware (via Node/Express — concepts transfer to Spring Boot)
 - [ ] **P2** — HTML fundamentals (minimum web vocabulary)
 - [ ] **P1** — GitHub Foundations certification
-- [ ] **P4** — Advanced CSS, Bootstrap, Tailwind, SASS, React, React Native *(out of scope — deliberately skipped)*
-
----
+- [ ] **P4** — Advanced CSS, Bootstrap, Tailwind, SASS, React, React Native *(out of scope — deliberately skipped)* -->
 
 ## Phase 1 — Algorithms and Programming Logic
 
