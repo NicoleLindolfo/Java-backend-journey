@@ -40,7 +40,7 @@ This roadmap is organized by **phase, not by calendar deadline**. One year is th
 - [ ] **P1** — Enums
 - [ ] **P1** — Generics
 - [ ] **P0** — Exception handling
-- [ ] **P2** — Java IO
+- [ ] **P2** — Java I/O
 - [ ] **P1** — Practical projects
 
 ---
