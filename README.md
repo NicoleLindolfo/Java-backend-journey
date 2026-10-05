@@ -1,6 +1,6 @@
-# java-backend-journey
-# Junior-In-1Year
 # My 12-month journey from zero to Junior Backend Software Engineer in Java — roadmap, progress, and real code.
+# Goal: Get hired within 1 year!
+
 
 
   # 🚀 From Beginner to Backend Software Engineer in Java
