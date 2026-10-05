@@ -11,7 +11,6 @@ This roadmap is organized by **phase, not by calendar deadline**. One year is th
 
 **Goal:** move past absolute zero without committing to a final language/stack yet.
 
-- [ ] **P0** — Programming logic, conditionals/loops, functions, recursion
 - [ ] **P0** — Object-Oriented Programming (classes, inheritance, encapsulation, polymorphism)
 - [ ] **P0** — Git and GitHub (flow, branches, commits, PRs)
 - [ ] **P1** — SQL with PostgreSQL (queries, joins, aggregations, subqueries, transactions, procedures)
@@ -22,6 +21,7 @@ This roadmap is organized by **phase, not by calendar deadline**. One year is th
 
 ## Phase 1 — Algorithms and Programming Logic
 
+- [ ] **P0** — Programming logic, conditionals/loops, functions, recursion
 - [ ] **P0** — Variables and data types
 - [ ] **P0** — Control flow: loops and conditionals
 - [ ] **P0** — Arrays and matrices
