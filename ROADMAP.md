@@ -2,7 +2,8 @@
 
 > Priorities: **P0** essential · **P1** high value · **P2** important · **P3** optional · **P4** low return at this stage
 
-This roadmap is organized by **phase, not by calendar deadline**. One year is the baseline target — not a hard constraint per phase. If a phase takes longer, that's fine; the plan continues. Progress is tracked by capability (see ./PROGRESS.md), not by whether a date was hit.
+This roadmap is organized by **phase, not by calendar deadline**. One year is the baseline target — not a hard constraint per phase. If a phase takes longer, that's fine; the plan continues. Progress is tracked by capability (see ([`PROGRESS.md`](./PROGRESS.md))), not by whether a date was hit.
+
 
 ---
 
