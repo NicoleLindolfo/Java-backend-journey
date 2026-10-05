@@ -16,7 +16,7 @@ This is the public record of my 12-month journey to become a **Junior Backend So
 Here you'll find:
 - The **full roadmap** I'm following ([`ROADMAP.md`](./ROADMAP.md))
 - My **tracked progress** at 2, 6, 8, and 12-month checkpoints ([`PROGRESS.md`](./PROGRESS.md))
-- My parallel **technical English** track (zero → B1) ([`english-track.md`](./english-track.md))
+- My parallel **technical English** track (zero → B1) ([`ENGLISH.md`](./ENGLISH.md))
 - Code, exercises, and projects organized by study phase
 
 Every new study session results in a commit — the commit history itself is meant to be an honest, verifiable record of my progress.
