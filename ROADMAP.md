@@ -109,3 +109,54 @@ This roadmap is organized by **phase, not by calendar deadline**. One year is th
 
 - Final segment: Fintech/Payments vs. Infrastructure/Data Streaming — to be decided later, with more hands-on experiencewq
 
+
+Projeto âncora: API de pagamentos/carteira em Spring Boot + PostgreSQL, com idempotency keys, lançamentos em partida dobrada (ledger), controle de concorrência, testes de integração e README com decisões técnicas documentadas. Ele vira Tier 3, com chance de Tier 4.
+README em inglês simples desde o início.
+Kafka, Redis, AWS, observabilidade.
+Primeira contribuição open source pequena (documentação ou issue bem escrita).
+Escolher entre Fintech e Data Infra, depois de ter experiência prática.
+
+-Projeto 1 (flagship): API de pagamentos com ledger
+
+O que é: um mini processador de pagamentos em Java + Spring Boot + PostgreSQL. Um comerciante cria uma cobrança, ela é autorizada, capturada e pode ser reembolsada.
+
+O que ele precisa ter (é isso que o torna Tier 3 e não "projeto de estudante"):
+
+Chave de idempotência: a mesma requisição enviada duas vezes cria uma cobrança só.
+Ledger em partida dobrada: cada movimentação gera lançamentos de débito e crédito que sempre fecham em zero.
+Máquina de estados da cobrança, com transições válidas e inválidas bloqueadas.
+Controle de concorrência: lock otimista ou pessimista, para dois saques simultâneos não estourarem o saldo.
+Transactional outbox: o evento só é publicado se a transação confirmou.
+Webhooks com retry e backoff.
+Testes de integração com Testcontainers, incluindo um teste de concorrência (ex.: 100 threads, mesma chave, uma cobrança).
+Log de auditoria e cuidado com dados sensíveis (não guardar número de cartão, usar token simulado).
+README e ADRs (decisões arquiteturais): por que escolhi lock otimista, por que partida dobrada.
+
+Como te ajuda: cobre quase toda pergunta típica de entrevista de pagamentos ("como evitar cobrança duplicada?", "o que acontece se o serviço cair no meio da transação?") com código seu para apontar.
+
+
+
+Projeto 2: pipeline de eventos com Kafka
+
+O que é: uma extensão do Projeto 1. Os eventos de pagamento passam por Kafka, e consumidores calculam saldos, detectam padrões suspeitos simples e geram relatórios.
+
+Precisa ter: consumidor idempotente, retries, dead-letter queue, ordenação por chave, métricas básicas (Prometheus/Grafana) e a explicação do trade-off at-least-once vs exactly-once.
+
+Como te ajuda: é a ponte entre Fintech e Infra de Dados, então você mantém as duas portas abertas sem decidir agora. Também mostra que você pensa em sistemas distribuídos, não só em um serviço isolado.
+
+
+
+Projeto 3: laboratório de falhas e carga (o diferenciador)
+
+O que é: um relatório reproduzível provando que o sistema se comporta bem sob estresse: teste de carga (k6), duplicação de mensagens, queda do banco no meio de uma transação, reinício de consumidor.
+
+Precisa ter: cenários, resultados, o que quebrou, o que você corrigiu e uma análise no formato de postmortem.
+
+Como te ajuda: quase nenhum júnior faz isso. É a evidência de que você pensa em confiabilidade, justamente o que sua área-alvo exige, e vira ótimo material de conversa na entrevista. Este é o seu Tier 4.
+
+Ordem sugerida (por fase, não por data, como você já faz)
+Fundamentos + Spring/SQL: exercícios com testes. Ainda não são portfólio.
+Projeto 1 quando você dominar Spring Boot, SQL e testes (provavelmente a maior parte do meio do ano).
+Projeto 2 com o Projeto 1 estável.
+Projeto 3 no final, sobre o que já existe.
+Candidaturas só depois do Projeto 1 estar sólido. Não espere o 3 terminar para começar a se candidatar.
